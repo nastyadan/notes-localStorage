@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            background-color: cadetblue;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form {
+            margin: 3em;
+            width: 60vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            color: whitesmoke;
+
+        }
+
+        #write {
+            margin: 1em 0;
+        }
+
+        .btn {
+            width: 50%;
+            background-color: lightblue;
+            border: 1px solid whitesmoke;
+        }
+
+        .btn:hover {
+            background-color: cornflowerblue;
+            border: 2.5px solid whitesmoke;
+        }
+
+        #get {
+            width: 60vw;
+            display: flex;
+            justify-content: flex-start;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" class="form">
+        <label for="write">Ваша заметка:</label>
+        <textarea name="" id="write" cols="30" rows="10"
+            placeholder='Попробуйте ввести "Я не смогу понять js"'></textarea>
+        <input type="button" class="btn" value="Сохранить" onclick="Save()">
+    </form>
+    <div id="get"></div>
+
+    <script>
+        let allNotes = [];
+        document.addEventListener('DOMContentLoaded', function (event) {
+
+            let savedNotes = localStorage.getItem('get');
+            if (savedNotes !== null) {
+                document.getElementById("get").innerHTML += `${savedNotes} <br>`;
+            }
+        })
+
+
+
+
+        function Save() {
+
+            let newNote = document.getElementById("write").value;
+
+            if (newNote.match(/[`Я не смогу понять js`]/i)) {
+                alert('Сможешь!');
+                newNote = `Я  смогу понять js`
+            }
+            allNotes.push(newNote);
+            console.log(allNotes);
+            document.getElementById("get").innerHTML +=
+                `${newNote} <br><br>`;
+
+
+
+
+            localStorage.removeItem('get');
+            if (localStorage.getItem("get") == null) {
+                localStorage.setItem("get", allNotes);
+            }
+
+        }
+    </script>
+</body>
+
+</html>
